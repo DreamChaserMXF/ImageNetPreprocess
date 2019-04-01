@@ -13,10 +13,13 @@ Get a clone of the tensorflow's model repo from [here](https://github.com/tensor
 # Step 2.
 
 1. Choose a directory where you want to put your data into, just like
+
 >/home/mxf/data/ILSVRC2012
 
 2. Make some directories which you'll need later:
+
 > /home/mxf/data/ILSVRC2012/raw-data
+
 > /home/mxf/data/ILSVRC2012/raw-data/bounding_boxes
 
 3. Make some soft links to the downloaded files
@@ -42,18 +45,25 @@ echo "End"
 ```
 5. Enter the directory models/research/inception/inception/data, then make some modifications (turn off downloading)
   5.1. Open download_and_preprocess_imagenet.sh, change line
+  
   > WORK_DIR="$0.runfiles/inception/inception"
+  
   to
+  
   > WORK_DIR=".."
 
   5.2. Change line
+  
   >BUILD_SCRIPT="${WORK_DIR}/build_imagenet_data"
+  
   to
+  
   >BUILD_SCRIPT="${WORK_DIR}/build_imagenet_data.py"
 
   5.3. Open download_imagenet.sh, commetn lines starting with 'wget'
   
   5.4 Open build_imagenet_data.py and change the first line to your customized python path, such as
+  
   > #!/home/mengxiangfei/home/miniconda3/envs/tf/bin/python
 
 6. Execute download_and_preprocess_imagenet.sh with specified dir
