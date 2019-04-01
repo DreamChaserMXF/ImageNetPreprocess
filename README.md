@@ -6,11 +6,11 @@ More specifically, the imagenet dataset is compressed into several files. Extrac
 
 Note that you still need to download the imagenet dataset from official site (which need register and send an formal request)
 
-# Step 1.
+# Step 1. Clone the tensorflow's model zoo
 
 Get a clone of the tensorflow's model repo from [here](https://github.com/tensorflow/models)
 
-# Step 2.
+# Step 2. Prepare data
 
 1. Choose a directory where you want to put your data into, just like
 
@@ -43,8 +43,10 @@ done
 
 echo "End"
 ```
-5. Enter the directory models/research/inception/inception/data, then make some modifications (turn off downloading)
-  5.1. Open download_and_preprocess_imagenet.sh, change line
+
+# Step 3. Adjust preprocess scripts
+1. Enter the directory models/research/inception/inception/data, then make some modifications (turn off downloading)
+  1.1. Open download_and_preprocess_imagenet.sh, change line
   
   > WORK_DIR="$0.runfiles/inception/inception"
   
@@ -52,7 +54,7 @@ echo "End"
   
   > WORK_DIR=".."
 
-  5.2. Change line
+  1.2. Change line
   
   >BUILD_SCRIPT="${WORK_DIR}/build_imagenet_data"
   
@@ -60,11 +62,12 @@ echo "End"
   
   >BUILD_SCRIPT="${WORK_DIR}/build_imagenet_data.py"
 
-  5.3. Open download_imagenet.sh, commetn lines starting with 'wget'
+  1.3. Open download_imagenet.sh, commetn lines starting with 'wget'
   
-  5.4 Open build_imagenet_data.py and change the first line to your customized python path, such as
+  1.4 Open build_imagenet_data.py and change the first line to your customized python path, such as
   
   > #!/home/mengxiangfei/home/miniconda3/envs/tf/bin/python
 
-6. Execute download_and_preprocess_imagenet.sh with specified dir
+2. Execute download_and_preprocess_imagenet.sh with specified dir
+
 > download_and_preprocess_imagenet.sh /home/mxf/data/ILSVRC2012
