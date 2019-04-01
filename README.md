@@ -27,20 +27,34 @@ Get a clone of the tensorflow's model repo from [here](https://github.com/tensor
 
 >ln -s /home/mxf/data/downloaded/ILSVRC2012_img_val.tar /home/mxf/data/ILSVRC2012/ILSVRC2012_img_val.tar
 
-4. Enter the directory models/research/inception/inception/data, then make some modifications (turn off downloading)
-  4.1. Open download_and_preprocess_imagenet.sh, comment line 61:
-  > WORK_DIR="$0.runfiles/inception/inception"
+4. Extract Annotation.tar.gz to a folder, then you'll see many zipped (\*.tar.gz) files. Extract all the small zip files. You can refer to the scripts as follows:
+```
+mkdir Annotation
+tar xf Annotation.tar.gz -C Annotation/
+for SYNSET in Annotation/*.tar.gz
+do
+    echo "Processing: Annotation/${SYNSET}"
+    tar xf ${SYNSET}
+    rm ${SYNSET}
+done
 
-  4.2. Add a line below:
+echo "End"
+```
+5. Enter the directory models/research/inception/inception/data, then make some modifications (turn off downloading)
+  5.1. Open download_and_preprocess_imagenet.sh, change line
+  > WORK_DIR="$0.runfiles/inception/inception"
+  to
   > WORK_DIR=".."
 
-  4.3. Change line
+  5.2. Change line
   >BUILD_SCRIPT="${WORK_DIR}/build_imagenet_data"
   to
   >BUILD_SCRIPT="${WORK_DIR}/build_imagenet_data.py"
 
-  4.3. Open download_imagenet.sh, commetn lines starting with 'wget'
+  5.3. Open download_imagenet.sh, commetn lines starting with 'wget'
+  
+  5.4 Open build_imagenet_data.py and change the first line to your customized python path, such as
+  > #!/home/mengxiangfei/home/miniconda3/envs/tf/bin/python
 
-5. Execute download_and_preprocess_imagenet.sh with specified dir
+6. Execute download_and_preprocess_imagenet.sh with specified dir
 > download_and_preprocess_imagenet.sh /home/mxf/data/ILSVRC2012
-
